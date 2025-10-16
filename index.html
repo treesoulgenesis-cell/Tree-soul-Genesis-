@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tree Soul Genesis (TSG)</title>
+<style>
+  /* Reset & Global */
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom, #000000, #0b3d0b, #00ff99);
+    color: #fff;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+  a { color:#0ff; text-decoration:none; }
+  section { min-height:100vh; display:flex; align-items:center; justify-content:center; flex-direction:column; padding:50px 20px; opacity:0; transform:translateY(50px); transition: all 1s ease; }
+  section.visible { opacity:1; transform:translateY(0); }
+
+  /* Hero */
+  #hero {
+    position: relative;
+    background: linear-gradient(135deg, #001100, #003300, #00ff99);
+    overflow:hidden;
+    justify-content:center;
+    text-align:center;
+  }
+  #logo-container {
+    perspective:1000px;
+    margin-bottom:20px;
+  }
+  #logo {
+    width:200px;
+    height:200px;
+    border-radius:50%;
+    animation: rotateLogo 20s linear infinite, glowAura 5s ease-in-out infinite alternate;
+    box-shadow: 0 0 20px #00ff99, 0 0 40px #00ff99;
+  }
+  @keyframes rotateLogo { 0%{transform:rotateY(0deg);} 100%{transform:rotateY(360deg);} }
+  @keyframes glowAura { 0%{box-shadow:0 0 20px #00ff99;} 50%{box-shadow:0 0 40px #00ffff;} 100%{box-shadow:0 0 20px #00ff99;} }
+
+  .hero-buttons button {
+    padding:15px 30px;
+    margin:10px;
+    border:none;
+    border-radius:30px;
+    background:linear-gradient(45deg, #00ff99, #00ccff);
+    color:#000;
+    font-weight:bold;
+    cursor:not-allowed;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px #00ff99;
+  }
+
+  /* Partikel Background */
+  canvas#particles { position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; }
+
+  /* Sections */
+  h1, h2, h3 { margin-bottom:20px; text-align:center; }
+  p { max-width:700px; text-align:center; margin-bottom:20px; line-height:1.6; }
+
+  /* Tokenomics cards */
+  .tokenomics { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; margin-top:30px; }
+  .card { background:rgba(0,255,153,0.1); padding:20px; border-radius:15px; min-width:200px; text-align:center; transition:0.3s; }
+  .card:hover { transform:scale(1.05); box-shadow:0 0 20px #00ff99; }
+
+  /* Roadmap timeline */
+  .timeline { display:flex; overflow-x:auto; padding:20px; gap:40px; }
+  .timeline-item { min-width:200px; background:rgba(0,255,153,0.1); padding:20px; border-radius:15px; flex-shrink:0; transition:all 0.5s ease; opacity:0; transform:translateY(30px);}
+  .timeline-item.visible { opacity:1; transform:translateY(0); box-shadow:0 0 20px #00ff99; }
+
+  /* Whitepaper embed */
+  #whitepaper { text-align:left; }
+  #whitepaper div { max-width:900px; margin:0 auto; line-height:1.6; color:#e0ffe0; }
+
+  /* Footer */
+  footer { background:rgba(0,0,0,0.8); padding:30px 20px; text-align:center; }
+  footer a { margin:0 10px; transition:0.3s; }
+  footer a:hover { color:#00ff99; }
+
+  /* Scrollbar for timeline */
+  .timeline::-webkit-scrollbar { height:8px; }
+  .timeline::-webkit-scrollbar-thumb { background:#00ff99; border-radius:4px; }
+</style>
+</head>
+<body>
+
+<!-- Partikel Canvas -->
+<canvas id="particles"></canvas>
+
+<!-- Hero Section -->
+<section id="hero">
+  <div id="logo-container">
+    <img src="https://i.imgur.com/tjHjLxg.png" id="logo" alt="TSG Logo">
+  </div>
+  <div class="hero-buttons">
+    <button>Launch App</button>
+    <button>Explore Token</button>
+  </div>
+</section>
+
+<!-- Deskripsi Proyek -->
+<section id="description">
+  <h1>Tree Soul Genesis</h1>
+  <p>Tree Soul Genesis is a green-energy crypto ecosystem built to connect blockchain innovation with real-world environmental impact.</p>
+  <p>Masalah yang diatasi: polusi karbon, energi tidak berkelanjutan, kurangnya insentif untuk proyek hijau.</p>
+</section>
+
+<!-- Visi & Misi -->
+<section id="vision-mission">
+  <h2>Visi & Misi</h2>
+  <p>Menjadi proyek global terdepan yang menyatukan blockchain dan alam demi masa depan bumi yang berkelanjutan. Menghubungkan teknologi blockchain dengan proyek lingkungan nyata, memberdayakan komunitas global untuk berpartisipasi aktif dalam restorasi hutan, dan menciptakan nilai ekonomi dari aksi menjaga bumi.</p>
+</section>
+
+<!-- Tokenomics -->
+<section id="tokenomics">
+  <h2>Tokenomics</h2>
+  <div class="tokenomics">
+    <div class="card">
+      <h3>Total Supply</h3>
+      <p>100,000,000 TSG</p>
+    </div>
+    <div class="card">
+      <h3>Founder</h3>
+      <p>7% (Resa Alfarizii)</p>
+    </div>
+    <div class="card">
+      <h3>Core Team</h3>
+      <p>10%</p>
+    </div>
+    <div class="card">
+      <h3>Community Rewards</h3>
+      <p>20%</p>
+    </div>
+    <div class="card">
+      <h3>Green Projects Fund</h3>
+      <p>30%</p>
+    </div>
+    <div class="card">
+      <h3>Liquidity & Development</h3>
+      <p>33%</p>
+    </div>
+  </div>
+</section>
+
+<!-- Roadmap -->
+<section id="roadmap">
+  <h2>Roadmap</h2>
+  <div class="timeline">
+    <div class="timeline-item">Q4 2025 - Website & Whitepaper rilis, NFT simbolik diluncurkan, Komunitas awal di X & GitHub</div>
+    <div class="timeline-item">Q1 2026 - Smart contract TSG di Solana mainnet, Partnership komunitas lingkungan, Penanaman pohon pertama</div>
+    <div class="timeline-item">Q2–Q4 2026 - Launch Green Dashboard, Integrasi NFT bukti kontribusi, Kolaborasi internasional</div>
+  </div>
+</section>
+
+<!-- Whitepaper v1.5 -->
+<section id="whitepaper">
+  <h2>Whitepaper v1.5 — Expanded Edition</h2>
+  <div>
+    <h3>1. Pendahuluan</h3>
+    <p>Tree Soul Genesis (TSG) adalah proyek energi hijau berbasis blockchain yang menggabungkan kekuatan teknologi digital dan kesadaran lingkungan. Kami percaya bahwa masa depan bumi bisa diselamatkan bukan hanya lewat aksi nyata, tapi juga lewat inovasi desentralisasi yang memberi insentif bagi siapa pun yang ikut menjaga alam.</p>
+
+    <h3>2. Masalah Global</h3>
+    <ul>
+      <li>Deforestasi dan hilangnya biodiversitas meningkat setiap tahun.</li>
+      <li>Kurangnya transparansi dalam proyek restorasi hutan.</li>
+      <li>Masyarakat masih belum memiliki sistem penghargaan nyata saat ikut menjaga lingkungan.</li>
+    </ul>
+
+    <h3>3. Solusi dari TSG</h3>
+    <p>Tree Soul Genesis hadir dengan visi menciptakan ekosistem token hijau yang mendanai restorasi hutan dan memberi penghargaan bagi komunitas yang peduli pada alam. Setiap transaksi dan kontribusi akan mendukung proyek reforestasi dan konservasi di dunia nyata melalui kemitraan dengan organisasi hijau.</p>
+
+    <h3>4. Visi & Misi</h3>
+    <strong>Visi:</strong> Menjadi proyek global terdepan yang menyatukan blockchain dan alam demi masa depan bumi yang berkelanjutan.<br>
+    <strong>Misi:</strong>
+    <ul>
+      <li>Menghubungkan teknologi blockchain dengan proyek lingkungan nyata.</li>
+      <li>Memberdayakan komunitas global untuk berpartisipasi aktif dalam restorasi hutan.</li>
+      <li>Menciptakan nilai ekonomi dari aksi menjaga bumi.</li>
+    </ul>
+
+    <h3>5. Tokenomics</h3>
+    <p>Total Supply: 100,000,000 TSG</p>
+    <ul>
+      <li>7% Founder (Resa Alfarizii)</li>
+      <li>10% Core Team</li>
+      <li>20% Community Rewards</li>
+      <li>30% Green Projects Fund</li>
+      <li>33% Liquidity & Development</li>
+    </ul>
+    <p>Blockchain: Solana<br>Token Type: Utility & Impact Token</p>
+
+    <h3>6. Roadmap</h3>
+    <strong>Q4 2025:</strong>
+    <ul>
+      <li>Website resmi dan whitepaper rilis.</li>
+      <li>NFT simbolik “Tree Soul Genesis” diluncurkan.</li>
+      <li>Komunitas awal dibentuk di X (Twitter) dan GitHub.</li>
+    </ul>
+    <strong>Q1 2026:</strong>
+    <ul>
+      <li>Smart contract TSG deployment di Solana mainnet.</li>
+      <li>Partnership dengan komunitas lingkungan.</li>
+      <li>Penanaman pohon pertama didanai dari transaksi TSG.</li>
+    </ul>
+    <strong>Q2–Q4 2026:</strong>
+    <ul>
+      <li>Launch platform Green Dashboard (monitor pohon & proyek).</li>
+      <li>Integrasi NFT sebagai bukti kontribusi lingkungan.</li>
+      <li>Kolaborasi internasional untuk ekspansi proyek.</li>
+    </ul>
+
+    <h3>7. Team & Legal</h3>
+    <ul>
+      <li>Founder: Resa Alfarizii</li>
+      <li>Core Team: Pengembang, Desainer, dan Environmental Partner (akan diumumkan)</li>
+      <li>Legal Advisor: Konsultan blockchain dan hukum lingkungan (proses seleksi)</li>
+    </ul>
+
+    <h3>8. Keamanan & Transparansi</h3>
+    <ul>
+      <li>Semua dana proyek dapat dilacak melalui blockchain.</li>
+      <li>Smart contract bersifat open-source di GitHub.</li>
+      <li>Audit independen akan dilakukan sebelum mainnet launch.</li>
+    </ul>
+
+    <h3>9. Risiko & Tanggung Jawab</h3>
+    <p>TSG adalah proyek berbasis komunitas. Nilai token dan hasil proyek dapat berubah seiring kondisi pasar crypto dan dukungan publik. Kami berkomitmen menjaga transparansi penuh serta memprioritaskan dampak positif bagi bumi.</p>
+
+    <h3>10. Penutup</h3>
+    <p>Tree Soul Genesis bukan hanya token — ini adalah gerakan menuju masa depan hijau, di mana setiap transaksi membantu bumi bernafas kembali.</p>
+    <blockquote>“Reviving Earth Through Digital Energy.”</blockquote>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>Connect with us:</p>
+  <a href="https://github.com/Alvrez888" target="_blank">GitHub</a> |
+  <a href="https://github.com/treesoulgenesis-cell" target="_blank">Project GitHub</a> |
+  <a href="#" target="_blank">Twitter</a>
+</footer>
+
+<script>
+  // Fade-in sections on scroll
+  const sections = document.querySelectorAll('section');
+  const timelineItems = document.querySelectorAll('.timeline-item');
+  const options = { threshold:0.2 };
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){ entry.target.classList.add('visible'); }
+    });
+  }, options);
+  sections.forEach(sec=>observer.observe(sec));
+  timelineItems.forEach(item=>observer.observe(item));
+
+  // Partikel background
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let particlesArray;
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  class Particle {
+    constructor(){
+      this.x = Math.random()*canvas.width;
+      this.y = Math.random()*canvas.height;
+      this.size = Math.random()*3+1;
+      this.speedX = Math.random()*1-0.5;
+      this.speedY = Math.random()*1-0.5;
+    }
+    update(){ this.x += this.speedX; this.y += this.speedY; if(this.x>canvas.width)this.x=0; if(this.x<0)this.x=canvas.width; if(this.y>canvas.height)this.y=0; if(this.y<0)this.y=canvas.height; }
+    draw(){ ctx.fillStyle='rgba(0,255,153,0.7)'; ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill(); }
+  }
+  function init(){ particlesArray=[]; for(let i=0;i<100;i++){ particlesArray.push(new Particle()); } }
+  function animate(){ ctx.clearRect(0,0,canvas.width,canvas.height); particlesArray.forEach(p=>{p.update();p.draw();}); requestAnimationFrame(animate); }
+  init(); animate();
+  window.addEventListener('resize',()=>{
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    init();
+  });
+</script>
+
+</body>
+</html>
